@@ -1,0 +1,188 @@
+import random  
+import re
+
+class Account:
+    ''' Saving account'''
+    l=set()
+    l1=[]
+    d=set()
+    '''Current Account'''
+    l2=set()
+    l3=[]
+    d1=set()
+    '''Fixed Account'''
+    l4=set()
+    l5=[]
+    d2=set()
+    ''''Officials'''
+    k=[{1112223330:"welcome"}]
+    def init(self):
+        self.balance=0
+    def str(self):
+        return f"Your Balance is: {self.balance}"
+    @classmethod
+    def helptofind(b,a,d):
+        c=int(input("Pass me your Account number: "))
+        if c in Account.l or c in Account.l2 or c in Account.l4:
+            try:
+                for i in range(len(a)):
+                    if c in a[i] and  d in a[i]:
+                        print(f"{d} is: {a[i][d]}")
+            except:
+                print("Something went wrong")
+        else:
+            print("Account Number donot Exist.")
+    @classmethod
+    def deposit(b,a,c,ammount):
+        try:
+            for i in range(len(a)):
+                if c in a[i]:
+                    a[i][c]=a[i][c]+ammount
+            print("Successful Transaction.")
+        except:
+            raise ValueError("Something Went Wrong")
+    @classmethod
+    def withdrawl(b,a,c,ammount):
+        try:
+            for i in range(len(a)):
+                if c in a[i]:
+                    if a[i][c]>ammount:
+                        a[i][c]=a[i][c]-ammount
+                    else:
+                        print("Low Balance")
+                        return 0
+                print("Successful Transaction.")
+                return 1
+        except:
+            raise ValueError("Something Went Wrong")
+    @classmethod
+    def closeaccount(b,a,d,f,c):
+        p=input("Are to sure to delete the account: ")
+        if p=="Yes" or p=="yes":
+            try:
+                for i in range(len(a)):
+                    if c in a[i]:
+                        a.pop(i)
+                d.remove(c)
+                f.remove(c)
+            except:
+                ...
+            else:
+                print("Account Deleted Successfully.")
+        if p=="No" or p=="no":
+            pass
+    @classmethod
+    def find(b,a,c,d):
+        if c in Account.l or c in Account.l2 or c in Account.l4:
+            try:
+                for i in range(len(a)):
+                    if c in a[i] and  d in a[i]:
+                        return (f"{a[i][d]}")
+            except:
+                print("Something went wrong")
+    
+    @classmethod
+    def passwordgenerator(a,b=15):
+        password_length = b
+        characters = "abcdefghijklmnopqrstuvwx123456789"
+        password = ""   
+        for index in range(password_length):
+            password = password + random.choice(characters)
+        return password
+    @classmethod
+    def officialportal(c,a):
+        if a not in Account.k:
+            print("Invalid input entered")
+    @classmethod
+    def upitransfer(z,a,b,c,d,e):
+        a=Account.withdrawl(a,c,e)
+        if a==1:
+            Account.deposit(b,d,e)
+    @classmethod
+    def CreatingAccount(P):
+        a=input("Which type of bank account you want to open: Saving Account/Current account/Fixed account: ")
+        if a=="Saving Account" or a=="saving account" or a=="Saving account":
+            a1=input("Pass me  your mobile number: ")
+            if re.search(r"^[0-9]+$",a1) is None:
+                raise ValueError("Invalid Mobile Number")
+            if len(a1)!=10:
+                raise ValueError("Invalid Mobile number")
+            a2=input("Pass me  your Email address: ")
+            if re.search(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+",a2) is None:
+                raise ValueError("Invalid Email address")
+            a3=input("Pass me  your Aadhar card number: ")
+            if re.search(r"^[0-9]+$",a3) is None:
+                raise ValueError("Invalid Aadhar Number")
+            if len(a3)!=12:
+                raise ValueError("Invalid Aadhar number")
+            while True:
+                a=random.randint(1000000000000,9999999999999)
+                if a not in Account.l:
+                    break
+            print(f"Thank You for Trusting our Website.\nYour account number is: {a}")
+            while True:
+                s=random.randint(1000000000,9999999999)
+                if s not in Account.d:
+                    break
+            password=Account.passwordgenerator()
+            print(f"Your Customer Id and password is {s} and {password}")
+            Account.l.add(a)
+            Account.d.add(s)
+            Account.l1.append({a:0,"Mobile Number":a1,"E-mail Address":a2,"Aadhar Number":a3,"Account Number":a,"Customer Id":s,s:password,"Password":password})
+
+        if a=="Current Account" or a=="current account" or a=="Current account":
+            a1=input("Pass me  your mobile number: ")
+            if re.search(r"^[0-9]+$",a1) is None:
+                raise ValueError("Invalid Mobile Number")
+            if len(a1)!=10:
+                raise ValueError("Invalid Mobile number")
+            a2=input("Pass me  your Email address: ")
+            if re.search(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+",a2) is None:
+                raise ValueError("Invalid Email address")
+            a3=input("Pass me  your Aadhar card number: ")
+            if re.search(r"^[0-9]+$",a3) is None:
+                raise ValueError("Invalid Aadhar Number")
+            if len(a3)!=12:
+                raise ValueError("Invalid Aadhar number")
+            while True :
+                a=random.randint(1000000000000,9999999999999)
+                if a not in Account.l2:
+                    break
+            print(f"Thank You for Trusting our Website.\nYour account number is: {a}")
+            while True:
+                s=random.randint(1000000000,9999999999)
+                if s not in Account.d1:
+                    break
+            password=Account.passwordgenerator()
+            print(f"Your Customer Id and password is {s} and {password}")
+            Account.l2.add(a)
+            Account.d1.add(s)
+            Account.l3.append({a:0,"Mobile Number":a1,"E-mail Address":a2,"Aadhar Number":a3,"Account Number":a,"Customer Id":s,s:password,"Password":password})
+            
+        if a=="Fixed Account" or a=="fixed account" or a=="Fixed account":
+            a1=input("Pass me  your mobile number: ")
+            if re.search(r"^[0-9]+$",a1) is None:
+                raise ValueError("Invalid Mobile Number")
+            if len(a1)!=10:
+                raise ValueError("Invalid Mobile number")
+            a2=input("Pass me  your Email address: ")
+            if re.search(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+",a2) is None:
+                raise ValueError("Invalid Email address")
+            a3=input("Pass me  your Aadhar card number: ")
+            if re.search(r"^[0-9]+$",a3) is None:
+                raise ValueError("Invalid Aadhar Number")
+            if len(a3)!=12:
+                raise ValueError("Invalid Aadhar number")
+            while True:
+                a=random.randint(1000000000000,9999999999999)
+                if a not in Account.l4:
+                    break
+            print(f"Thank You for Trusting our Website.\nYour account number is: {a}")
+            while True:
+                s=random.randint(1000000000,9999999999)
+                if s not in Account.d2:
+                    break
+            password=Account.passwordgenerator()
+            print(f"Your Customer Id and password is {s} and {password}")
+            Account.l4.add(a)
+            Account.l5.append({a:0,"Mobile Number":a1,"E-mail Address":a2,"Aadhar Number":a3,"Account Number":a,"Customer Id":s,s:password,"Password":password})
