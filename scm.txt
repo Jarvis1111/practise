@@ -185,4 +185,360 @@ class Account:
             password=Account.passwordgenerator()
             print(f"Your Customer Id and password is {s} and {password}")
             Account.l4.add(a)
-            Account.l5.append({a:0,"Mobile Number":a1,"E-mail Address":a2,"Aadhar Number":a3,"Account Number":a,"Customer Id":s,s:password,"Password":password})
+@classmethod
+    def Website(a):
+        p=int(input("Can you pass me your Account Number plz: "))
+        p1=int(input("Can you pass me your Customer Id plz: "))
+        ''' Saving Account'''
+        if p in Account.l and p1 in Account.d:
+            password=input("Can you pass me your Customer Id Password: ")
+            _password=Account.find(Account.l1,p,p1)
+            if password==_password:
+                j=input("Which Service you want: Upi Tranfer/Balance enquiry/Close account/Modify account:")
+                if j=="UPI Treansfer" or j=="upi transfer":
+                    while True:
+                        f=input("Account Number: ")
+                        if re.search(r"^[0-9]+$",f) is None:
+                            print("Invalid Account Number.")
+                        else:
+                            break
+                    f=int(f)
+                    while True:
+                        try:
+                            Ammount=int(input("Ammount:"))
+                        except ValueError:
+                            print("Enter Valid Input")
+                        else:
+                            break
+                    if f in Account.l or Account.l2 or Account.l4:
+                        if f in Account.l:
+                            Account.upitransfer(Account.l1,Account.l1,p,f,Ammount)
+                        if f in Account.l2:
+                            Account.upitransfer(Account.l1,Account.l2,p,f,Ammount)
+                        if f in Account.l4:
+                            Account.upitransfer(Account.l1,Account.l4,p,f,Ammount)
+                    else:
+                        print("Account Number donot exist.") 
+                if j=="Balance Enquiry" or j=="balance enquiry":
+                    while True:
+                        f=input("Account Number: ")
+                        if re.search(r"^[0-9]+$",f) is None:
+                            print("Invalid Account Number.")
+                        else:
+                            break
+                    f=int(f)
+                    if f in Account.l or Account.l2 or Account.l4:
+                        if f in Account.l:
+                            for i in range(len(Account.l1)):
+                                if f in Account.l1[i]:
+                                    print(Account.l1[i][f])
+                        if f in Account.l2:
+                            for i in range(len(Account.l3)):
+                                if f in Account.l3[i]:
+                                    print(Account.l3[i][f])
+                        if f in Account.l4:
+                            for i in range(len(Account.l5)):
+                                if f in Account.l5[i][f]:
+                                    print(Account.l5[i][f])
+                    else:
+                        print("Account Number donot exist.")
+                if j=="Close account" or j=="close account":
+                    Account.closeaccount(Account.l1,Account.l,Account.d,p)
+                if j=="Modify account"or  j=="modify account":
+                    v=input("Change Mobile Number/Change E-mail id/Change Password:")
+                    if v=="Mobile Number"or v=="mobile number" or v=="Mobile number":
+                        f=input("New Mobile Number: ")
+                        for i in range(len(Account.l1)):
+                            if p in Account.l1[i]:
+                                while True:
+                                    if re.search(r"^[0-9]+$",f) is None:
+                                        print("Invalid Mobile Number Entered.")
+                                    else:
+                                        break
+                                f=int(f)
+                                Account.l1[i]["Mobile Number"]=f
+                                print("Your Mobile number has been changed.")
+                    if v=="E mail" or v=="E-mail":
+                        f1=input("New E-Mail address: ")
+                        for i in range(len(Account.l1)):
+                            if p in Account.l1[i]:
+                                while True:
+                                    if re.search(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+",f1) is None:
+                                        print("Invalid E-Mail Id Entered.")
+                                    else:
+                                        break
+                                Account.l1[i]["E-mail Address"]=f1
+                                print("Your E-mail address has been changed.")
+                    if v=="Password" or v=="password":
+                        f2=input("Enter New Password:")
+                        for i in range(len(Account.l1)):
+                            if p in Account.l1[i]:
+                                Account.l1[i]["Password"]=f2
+            else:
+                print("Invalid Password")
+        ''' Current Account'''
+        if p in Account.l2 and p1 in Account.d1:
+            password1=input("Can you pass me your Customer Id Password: ")
+            _password1=Account.find(Account.l3,p,p1)
+            if password1==_password1:
+                j1=input("Which Service you want: UPI Transfer/Balance enquiry/Close account/Modify account:")
+                if j1 =="UPI Tranfer" or j1=="upi transfer":
+                    while True:
+                        f=input("Account Number: ")
+                        if re.search(r"^[0-9]+$",f) is None:
+                            print("Invalid Account Number.")
+                        else:
+                            break
+                    f=int(f)
+                    while True:
+                        try:
+                            Ammount=int(input("Ammount:"))
+                        except ValueError:
+                            print("Enter Valid Input")
+                        else:
+                            break
+                    if f in Account.l or Account.l2 or Account.l4:
+                        if f in Account.l:
+                            Account.upitransfer(Account.l3,Account.l1,p,f,Ammount)
+                        if f in Account.l2:
+                            Account.upitransfer(Account.l3,Account.l2,p,f,Ammount)
+                        if f in Account.l4:
+                            Account.upitransfer(Account.l3,Account.l4,p,f,Ammount)
+                    else:
+                        print("Account Number donot exist.") 
+                if j1=="Balance Enquiry"or j1=="balance enquiry":
+                    while True:
+                        f=input("Account Number: ")
+                        if re.search(r"^[0-9]+$",f) is None:
+                            print("Invalid Account Number.")
+                        else:
+                            break
+                    f=int(f)
+                    if f in Account.l or Account.l2 or Account.l4:
+                        if f in Account.l:
+                            for i in range(len(Account.l1)):
+                                if f in Account.l1[i]:
+                                    print(Account.l1[i][f])
+                        if f in Account.l2:
+                            for i in range(len(Account.l3)):
+                                if f in Account.l3[i]:
+                                    print(Account.l3[i][f])
+                        if f in Account.l4:
+                            for i in range(len(Account.l5)):
+                                if f in Account.l5[i][f]:
+                                    print(Account.l5[i][f])
+                    else:
+                        print("Account Number donot exist.")
+                if j1=="Close account" or j1=="close account":
+                    Account.closeaccount(Account.l3,Account.l2,Account.d1,p)
+                if j1=="Modify account" or j1=="modify account":
+                    v=input("Change Mobile Number/Change E-mail id/Change Password")
+                    if v=="Mobile Number"or v=="mobile number" or v=="Mobile number":
+                        f=input("New Mobile Number: ")
+                        for i in range(len(Account.l3)):
+                            if p in Account.l3[i]:
+                                while True:
+                                    if re.search(r"^[0-9]+$",f) is None:
+                                        print("Invalid Mobile Number Entered.")
+                                    else:
+                                        break
+                                f=int(f)
+                                Account.l3[i]["Mobile Number"]=f
+                                print("Your Mobile number has been changed.")
+                    if v=="E mail" or v=="E-mail":
+                        f1=input("New E-Mail address: ")
+                        for i in range(len(Account.l3)):
+                            if p in Account.l3[i]:
+                                while True:
+                                    if re.search(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+",f1) is None:
+                                        print("Invalid E-Mail Id Entered.")
+                                    else:
+                                        break
+                                Account.l3[i]["E-mail Address"]=f1
+                                print("Your E-mail address has been changed.")
+                    if v=="Password" or v=="password":
+                        f2=input("Enter New Password:")
+                        for i in range(len(Account.l3)):
+                            if p in Account.l3[i]:
+                                Account.l3[i]["Password"]=f2
+            else:
+                print("Invalid Password")
+        ''' Fixed Account'''
+        if p in Account.l4 and p1 in Account.d2:
+            password2=input("Can you pass me your Customer Id Password: ")
+            _password2=Account.find(Account.l5,p,p1)
+            if password2==_password2:
+                j2=input("Which Service you want: UPI Transfer/Balance enquiry/Close account/Modify account:")
+                if j2=="UPI Tranfer" or j2 =="upi transfer":
+                    while True:
+                        f=input("Account Number: ")
+                        if re.search(r"^[0-9]+$",f) is None:
+                            print("Invalid Account Number.")
+                        else:
+                            break
+                    f=int(f)
+                    while True:
+                        try:
+                            Ammount=int(input("Ammount:"))
+                        except ValueError:
+                            print("Enter Valid Input")
+                        else:
+                            break
+                    if f in Account.l or Account.l2 or Account.l4:
+                        if f in Account.l:
+                            Account.upitransfer(Account.l5,Account.l1,p,f,Ammount)
+                        if f in Account.l2:
+                            Account.upitransfer(Account.l5,Account.l2,p,f,Ammount)
+                        if f in Account.l4:
+                            Account.upitransfer(Account.l5,Account.l4,p,f,Ammount)
+                    else:
+                        print("Account Number donot exist.") 
+                if j2=="Balance Enquiry"or j2=="balance enquiry":
+                    while True:
+                        f=input("Account Number: ")
+                        if re.search(r"^[0-9]+$",f) is None:
+                            print("Invalid Account Number.")
+                        else:
+                            break
+                    f=int(f)
+                    if f in Account.l or Account.l2 or Account.l4:
+                        if f in Account.l:
+                            for i in range(len(Account.l1)):
+                                if f in Account.l1[i]:
+                                    print(Account.l1[i][f])
+                        if f in Account.l2:
+                            for i in range(len(Account.l3)):
+                                if f in Account.l3[i]:
+                                    print(Account.l3[i][f])
+                        if f in Account.l4:
+                            for i in range(len(Account.l5)):
+                                if f in Account.l5[i][f]:
+                                    print(Account.l5[i][f])
+                    else:
+                        print("Account Number donot exist.")
+                if j2=="Close account" or j2=="close account":
+                    Account.closeaccount(Account.l5,Account.l4,Account.d2,p)
+                if j2=="Modify account" or j2=="modify account":
+                    v=input("Change Mobile Number/Change E-mail id/Change Password")
+                    if v=="Mobile Number"or v=="mobile number" or v=="Mobile number":
+                        f=input("New Mobile Number: ")
+                        for i in range(len(Account.l5)):
+                            if p in Account.l5[i]:
+                                while True:
+                                    if re.search(r"^[0-9]+$",f) is None:
+                                        print("Invalid Mobile Number Entered.")
+                                    else:
+                                        break
+                                f=int(f)
+                                Account.l5[i]["Mobile Number"]=f
+                                print("Your Mobile number has been changed.")
+                    if v=="E mail" or v=="E-mail":
+                        f1=input("New E-Mail address: ")
+                        for i in range(len(Account.l5)):
+                            if p in Account.l5[i]:
+                                while True:
+                                    if re.search(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+",f1) is None:
+                                        print("Invalid E-Mail Id Entered.")
+                                    else:
+                                        break
+                                Account.l5[i]["E-mail Address"]=f1
+                                print("Your E-mail address has been changed.")
+                    if v=="Password" or v=="password":
+                        f2=input("Enter New Password:")
+                        for i in range(len(Account.l5)):
+                            if p in Account.l5[i]:
+                                Account.l5[i]["Password"]=f2
+            else:
+                print("Invalid Password")
+    @classmethod
+    def start(a):
+        p1=input("User/Official: ")
+        if p1=="user"or p1=="User":
+            p=input("Do you have Account in this Bank: ")
+            if p=="yes" or p=="Yes":
+                Account.Website()
+            if p=="No" or p=="no":
+                Account.CreatingAccount()
+                while True:
+                    _=input("Do you want to use any other servises: ")
+                    if _ =="Yes" or _=="yes":
+                        Account.Website()
+                    if _=="No" or _ =="no":
+                        print("Thank You for using our website.")
+                        break
+        if p1=="Official"or p1=="official":
+            while True:
+                j=input("Pass me your id: ")
+                if re.search(r"^[0-9]+$",j) is None:
+                    print("Invalid Input")
+                else:
+                    break
+            j=int(j)
+            j1=input("Pass me our Password: ")
+            Account.officialportal({j:j1})
+            print("Welcome")
+            n=input("Deposit Money/Money Withdrawl/Closing Account/Insert Id:")
+            if n=="Deposit Money" or n=="deposit money":
+                while True:
+                    h=input("Pass me you Account Number Plz: ")
+                    if re.search(r"^[0-9]+$",h) is None:
+                        print("Invaild Account Number")
+                    else:
+                        break
+                h=int(h)
+                p2=int(input("Ammount: "))
+                if h in Account.l or h in  Account.l2 or Account.l4:
+                    if h in Account.l:
+                        Account.deposit(Account.l1,h,p2)
+                    if h in  Account.l2:
+                        Account.deposit(Account.l3,h,p2)
+                    if h in Account.l4:
+                        Account.deposit(Account.l5,h,p2)
+                else:
+                    print("Account Number donot exist.")
+            
+            if n=="Money Withdrawl" or n=="money withdrawl":
+                while True:
+                    h1=input("Pass me you Account Number: ")
+                    if re.search("^[0-9]+$",h1) is None:
+                        print("Invaild Account Number")
+                    else:
+                        break
+                h1=int(h1)
+                p2=int(input("Ammount: "))
+                if h1 in Account.l or h1 in  Account.l2 or h1 in Account.l4:
+                    if h1 in Account.l:
+                        Account.withdrawl(Account.l1,h1,p2)
+                    if h1 in  Account.l2:
+                        Account.withdrawl(Account.l3,h1,p2)
+                    if h1 in Account.l4:
+                        Account.withdrawl(Account.l5,h1,p2)
+                else:
+                    print("Account Number donot exist")
+            if n=="Closing Account" or n=="closing account":
+                while True:
+                    m=input("Pass me Account Number: ")
+                    if re.search(r"^[0-9]+$",m) is None:
+                        print("Invalid Account Number")
+                    else:
+                        break
+                m=int(m)
+                if m in Account.l or m in Account.l2 or m in Account.l4:
+                    if m in Account.l:
+                        Account.closeaccount(Account.l1,m)
+                    if m in Account.l2:
+                        Account.closeaccount(Account.l3,m)
+                    if m in Account.l4:
+                        Account.closeaccount(Account.l5,m)
+                else:
+                    print("Account Number Donot Exist")
+            if n== "Insert Id" or n=="insert id":
+                y=random.randint(1000000000,9999999999)
+                z=Account.passwordgenerator(10)
+                print(f"Id:{y},Password='{z}'")
+                Account.k.append({y,z})
+
+while True:
+    Account.start()
+
+Account.l5.append({a:0,"Mobile Number":a1,"E-mail Address":a2,"Aadhar Number":a3,"Account Number":a,"Customer Id":s,s:password,"Password":password})
